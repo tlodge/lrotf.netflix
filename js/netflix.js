@@ -11,22 +11,28 @@ let count = 0;
 
 document.addEventListener("DOMContentLoaded", function(){
    var slider = document.getElementById("myRange");
-   const smax = Math.floor(0.5* films.length);
-   
+   const smax = films.length
+   renderBackground(50);
    renderLine("trending",0, smax);
    renderLine("watchagain",1, smax);
    renderLine("originals",2, smax);
+   
    // Update the current slider value (each time you drag the slider handle)
    slider.oninput = function() {
      
      const totalfilms = Math.max(1,Math.floor(this.value/100 * films.length));
      console.log(totalfilms);
+     renderBackground(this.value);
      renderLine("trending"    ,0, totalfilms);
      renderLine("watchagain"  ,1, totalfilms);
      renderLine("originals"   ,2, totalfilms);
    }
 });
 
+const renderBackground = (value)=>{
+   const inv = 100-value;
+   d3.select("body").transition().duration(750).style("background-color", `rgb(${inv}%, ${inv}%,${inv}%)`);
+}
 
 const renderLine =(title, row, tf)=>{
 
