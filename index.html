@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Netflix</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="d3/d3.min.js"></script>
+    <script src="js/netflix.js"></script>
+  </head>
+  <body> 
+    <div class="header">
+        <img src = "./films/netflix.svg" width="100px" height="50px"/>
+        <ul>
+          <li>Home</li>
+          <li>Series</li>
+          <li>Films</li>
+          <li>Latest</li>
+          <li>My List</li>
+        </ul>
+
+        <div class="slidecontainer">
+          <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        </div>
+    </div>
+    <div class="films">
+      <div class="row-0">
+          <h2>trending</h2>
+          <div class="trending">
+          
+          </div>
+      </div>
+
+      <div class="row-1">
+        <h2>originals</h2>
+        <div class="originals">
+        
+        </div>    
+      </div>
+
+      <div class="row-2">
+        <h2>my list</h2>
+        <div class="watchagain">
+        
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
