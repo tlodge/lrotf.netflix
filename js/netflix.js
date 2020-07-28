@@ -12,7 +12,7 @@ let count = 0;
 document.addEventListener("DOMContentLoaded", function(){
    var slider = document.getElementById("myRange");
    const smax = films.length
-   renderBackground(50);
+   renderBackground(100);
    renderLine("trending",0, smax);
    renderLine("watchagain",1, smax);
    renderLine("originals",2, smax);
@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function(){
 const renderBackground = (value)=>{
    const inv = 100-value;
    d3.select("body").transition().duration(750).style("background-color", `rgb(${inv}%, ${inv}%,${inv}%)`);
+   d3.selectAll("h2").transition().duration(750).style("color", `rgb(${value}%, ${value}%,${value}%)`);
 }
 
 const renderLine =(title, row, tf)=>{
