@@ -6,6 +6,7 @@ const films = [
 
 ]
 
+const indexes = films.map((f, i)=>i);
 
 let count = 0;
 
@@ -39,6 +40,9 @@ const renderLine =(title, row, tf)=>{
 
    const line = fetchRandomSelection(tf);
 
+
+   console.log("random selction", line);
+
    const root = d3.select(`div.row-${row}`);
    
    root.style("position", "absolute").style("top", `${row * 280}px`);
@@ -53,16 +57,51 @@ const renderLine =(title, row, tf)=>{
     
    //exit
    card.exit().transition().duration(750).style("opacity", 0).remove();
+
+   renderLock(line, row);
+}
+
+const renderLock = (line,row)=>{
+
+   const root = d3.select(`div.row-${row}`);
+   
+   root.style("position", "absolute").style("top", `${row * 280}px`);
+
+   const card = root.select(`div.lock`).selectAll("img").data(line, d=>d.id);
+   
+   //update
+   card.attr("src", 'films/lock.svg').style("opacity", 0).transition().duration(750).delay((d,i)=>200).style("opacity", (d)=>d.locked ? 1 : 0).style("left", (d,i)=>`${i*351}px`);
+      
+   //enter  
+   card.enter().append("img").attr("class", "card").attr("src",'films/lock.svg').style("opacity", 0).transition().duration(750).delay((d,i)=>200).style("left", (d,i)=>`${i*351}px`).style("opacity", (d)=>d.locked ? 1 : 0);
+    
+   //exit
+   card.exit().transition().duration(750).style("opacity", 0).remove();
+}
+
+
+
+const fetchRandomLock = (max)=>{
+   const tf = films.length - max;
+  
+
+   for (let i = 0; i < tf; i++){
+      locks.push({id:`l${i}`, film:"lock"});
+   }
+   return locks;
 }
 
 const fetchRandomSelection = (max)=>{
 
    const shuffled = films.map(a => [Math.random(), a]).sort((a, b) => a[0] - b[0]).map(a => a[1]);
+   const idx = indexes.map(a => [Math.random(), a]).sort((a, b) => a[0] - b[0]).map(a => a[1]).slice(0,max);
 
+   
    return shuffled.reduce((acc, item, i)=>{
-      if (i < max){
-          acc.push(item);
-      }
+      
+      //if (i < max){
+          acc.push({...item, locked: idx.indexOf(i) == -1});
+      //}
       return acc;
    },[]);   
 }
