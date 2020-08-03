@@ -92,3 +92,55 @@ h2{
     cursor: pointer; /* Cursor on hover */
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   }
+
+  #personal{
+      height: 100vh;
+      display:flex;
+    flex-direction: row;
+  }
+
+  .cimage{
+      width: 100%;
+      height: 100%;
+  }
+
+  .orange{
+      background-color: #FF5020;
+  }
+
+  .teal{
+    background-color: #009DA6;
+  }
+
+  .purple{
+    background-color: #554FA4;
+  }
+
+  .black{
+    background-color:#26233E;
+  }
+  .bcol{
+    min-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 30px;
+    flex-direction: column;
+  }
+
+  .col{
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+
+  .control{
+    display:flex;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+    color: white;
+    border: 1px solid white;
+  }

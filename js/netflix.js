@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function(){
      
      const totalfilms = Math.max(1,Math.floor(this.value/100 * films.length));
      console.log(totalfilms);
-     renderBackground(this.value);
+     //renderBackground(this.value);
      renderLine("trending"    ,0, totalfilms);
      renderLine("watchagain"  ,1, totalfilms);
      renderLine("originals"   ,2, totalfilms);
@@ -50,14 +50,14 @@ const renderLine =(title, row, tf)=>{
    const card = d3.select(`div.${title}`).selectAll("img").data(line, d=>d.id);
    
    //update
-   card.attr("src", d=>`films/${d.film}.jpg`).style("opacity", 0).transition().duration(750).delay((d,i)=>200).style("opacity", 1).style("left", (d,i)=>`${i*351}px`);
+   card.attr("src", d=>`films/${d.film}.jpg`).style("opacity", 1).transition().duration(750).style("opacity", 1).style("left", (d,i)=>`${i*351}px`);
       
    //enter  
-   card.enter().append("img").attr("class", "card").attr("src", d=>`films/${d.film}.jpg`).style("opacity", 0).transition().duration(750).delay((d,i)=>200).style("left", (d,i)=>`${i*351}px`).style("opacity", 1);
+   card.enter().append("img").attr("class", "card").attr("src", d=>`films/${d.film}.jpg`).transition().duration(750).delay((d,i)=>200).style("left", (d,i)=>`${i*351}px`);
     
    //exit
-   card.exit().transition().duration(750).style("opacity", 0).remove();
-
+   //card.exit().transition().duration(750).style("opacity", 0).remove();
+   card.exit().remove();
    renderLock(line, row);
 }
 
@@ -70,13 +70,13 @@ const renderLock = (line,row)=>{
    const card = root.select(`div.lock`).selectAll("img").data(line, d=>d.id);
    
    //update
-   card.attr("src", 'films/lock.svg').style("opacity", 0).transition().duration(750).delay((d,i)=>200).style("opacity", (d)=>d.locked ? 1 : 0).style("left", (d,i)=>`${i*351}px`);
+   card.attr("src", 'films/lock.svg').transition().duration(750).delay((d,i)=>200).style("opacity", (d)=>d.locked ? 1 : 0).style("left", (d,i)=>`${i*351}px`);
       
    //enter  
-   card.enter().append("img").attr("class", "card").attr("src",'films/lock.svg').style("opacity", 0).transition().duration(750).delay((d,i)=>200).style("left", (d,i)=>`${i*351}px`).style("opacity", (d)=>d.locked ? 1 : 0);
+   card.enter().append("img").attr("class", "card").attr("src",'films/lock.svg').transition().duration(750).delay((d,i)=>200).style("left", (d,i)=>`${i*351}px`).style("opacity", (d)=>d.locked ? 1 : 0);
     
    //exit
-   card.exit().transition().duration(750).style("opacity", 0).remove();
+   card.exit().remove();
 }
 
 

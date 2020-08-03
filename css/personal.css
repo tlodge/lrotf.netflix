@@ -1,0 +1,7 @@
+.slider::-webkit-slider-thumb {
+    background: #D6E100;    
+}
+  
+.slider::-moz-range-thumb {   
+    background: #D6E100; 
+}
