@@ -130,7 +130,47 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 const update = (data)=>{
-    const root = d3.select("svg").selectAll("path.extra").data(data);
+    const root = d3.select("svg.profile").selectAll("path.extra").data(data);
     root.enter().append("path").attr("class", "extra").attr("d",(d)=>d.path).style("fill", d=>d.style.fill).style("opacity",0).transition().duration(1000).style("opacity",1);
     root.exit().remove();
+
+    const randoms = [0,0,0].map(r=>Math.random() > 0.5 ? 232.109 : 162.589);
+
+    d3.select("ellipse.l1").transition().duration(1000).attr("cy", randoms[0]);
+    d3.select("ellipse.l2").transition().duration(1000).attr("cy", randoms[1]);
+    d3.select("ellipse.l3").transition().duration(1000).attr("cy", randoms[2]);
+
+
+    d3.select("rect.o1").transition().duration(1000).attr("y", 120 + Math.round(Math.random() * 170));
+    d3.select("rect.o2").transition().duration(1000).attr("y", 120 + Math.round(Math.random() * 170));
+    d3.select("rect.o3").transition().duration(1000).attr("y", 120 + Math.round(Math.random() * 170));
+
+
+    const transform = (angle, cx, cy)=>{
+        return `rotate(${angle}, ${cx}, ${cy})`;
+    };
+    
+     d3.select("g.acpointer").attr("transform", transform(-80 + Math.random() * 160, 234,277));
+     d3.select("g.heatpointer").attr("transform", transform(-80 + Math.random() * 160, 238, 250));
+     d3.select("g.filmpointer").attr("transform", transform(-100 + Math.random() * 140, 237, 268));
+
+     d3.select("ellipse.shelf").transition().duration(1000).style("opacity", 0.2 + Math.random());
+     d3.select("ellipse.sidelight").transition().duration(1000).style("opacity", 0.2 + Math.random());
+
+     
+     const randomdata = ()=>{
+        const total = Math.floor(Math.random() * 6);
+        return [0,0,0,0,0,0].map((d,i)=>i <= total ? 1 : 0); 
+     }
+     ["c1", "c2", "c3", "c4", "c5", "c6"].map(e=>{
+        const c = d3.select(`g.film${e}`).selectAll("rect").data(()=>randomdata());
+        c.transition().duration(1000).style("opacity", d=>d);
+
+        const m = d3.select(`g.music${e}`).selectAll("rect").data(()=>randomdata());
+        m.transition().duration(1000).style("opacity", d=>d);
+
+        const s = d3.select(`g.screen${e}`).selectAll("rect").data(()=>randomdata());
+        s.transition().duration(1000).style("opacity", d=>d);
+     })
+     
 }
